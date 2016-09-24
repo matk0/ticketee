@@ -1,1 +1,1 @@
-[ ] - Implement responsive styling beyond the Foundation framework.
+- [ ] Implement responsive styling beyond the Foundation framework.
