@@ -3,6 +3,6 @@ h1 Projects
 = link_to 'New Project', new_project_path
 
 #projects
-  = @projects.each do |project|
-    h2 = link_to project.name, project
+  - @projects.each do |project|
+    h2 = link_to project.name, project_path(project)
     p = project.description
