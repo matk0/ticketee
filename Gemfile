@@ -9,6 +9,8 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'slim'
+gem 'foundation-rails', '6.2.3.0'
+gem 'simple_form', '~> 3.1.0'
 
 group :development, :test do
   gem 'byebug'
