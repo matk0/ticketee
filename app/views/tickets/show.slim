@@ -2,5 +2,7 @@
   h1 = @project.name
 
   h2 = @ticket.name
+  ul.actions
+    li = link_to "Edit Ticket", [:edit, @project, @ticket], class: "hollow success button"
 
   = simple_format @ticket.description
