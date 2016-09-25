@@ -1,1 +1,2 @@
 - [ ] Implement responsive styling beyond the Foundation framework.
+- [ ] Style notifications and validation errors.
