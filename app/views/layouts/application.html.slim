@@ -21,8 +21,8 @@ html lang="en"
             li = link_to "Sign in", new_user_session_path
       - if user_signed_in?
         .top-bar-right
-          | Signed in as #{current_user.email}
           ul.menu
+            li = "Signed in as #{current_user.email}"
             li = link_to "Sign out", destroy_user_session_path, method: :delete
 
     .row
