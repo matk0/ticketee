@@ -16,6 +16,8 @@ html lang="en"
         <ul class="dropdown menu" data-dropdown-menu>
           li.menu-text = link_to "Ticketee", root_path
           li = link_to "Home", root_path
+          - admins_only do
+            li = link_to "Admin", admin_root_path
           - unless user_signed_in?
             li = link_to "Sign up", new_user_registration_path
             li = link_to "Sign in", new_user_session_path
