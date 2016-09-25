@@ -15,8 +15,8 @@ html lang="en"
       .top-bar-left
         <ul class="dropdown menu" data-dropdown-menu>
           li.menu-text = link_to "Ticketee", root_path
-          li
-            = link_to "Home", root_path
+          li = link_to "Home", root_path
+          li = link_to "Sign up", new_user_registration_path
 
     .row
       - flash.each do |key, message|

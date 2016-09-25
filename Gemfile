@@ -11,6 +11,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'slim'
 gem 'foundation-rails', '6.2.3.0'
 gem 'simple_form', '~> 3.1.0'
+gem 'devise', '~> 3.4.1'
 
 group :development, :test do
   gem 'byebug'
