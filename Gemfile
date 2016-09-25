@@ -20,6 +20,8 @@ end
 group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring'
+  gem 'guard', '~> 2.14'
+  gem 'guard-livereload', '~> 2.5', '>= 2.5.2'
 end
 
 group :test do
