@@ -1,6 +1,6 @@
 class TicketsController < ApplicationController
   before_action :set_project
-  before_action :set_ticket, only: [:show, :edit, :update, :destroy]
+  before_action :set_ticket, only: [:show, :edit, :update, :destroy, :toggle_completed]
 
   def index
   end
@@ -40,6 +40,12 @@ class TicketsController < ApplicationController
     flash[:notice] = "Ticket has been deleted."
 
     redirect_to @project
+  end
+
+  def toggle_completed
+    respond_to do |format|
+      format.js { @ticket.toggle_completed! }
+    end
   end
 
   private

@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20160925175336) do
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.integer  "author_id"
-    t.boolean  "complete",    default: false
+    t.boolean  "completed",   default: false
   end
 
   add_index "tickets", ["author_id"], name: "index_tickets_on_author_id"

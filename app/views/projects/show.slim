@@ -11,9 +11,11 @@ p = @project.description
 .button-group
   = link_to 'New Ticket', new_project_ticket_path(@project), class: 'success hollow button'
 
-#tickets
+table#tickets
   - @project.tickets.each do |ticket|
-    li
-      |# #{ticket.id} - 
-      = link_to ticket.name, [@project, ticket]
-
+    tr data-ticket-id="#{ticket.id}"
+      td
+        = simple_form_for [:toggle_completed, @project, ticket], remote: true do |f|
+          = f.input_field :completed
+      td.ticket-name
+        = link_to ticket.name, [@project, ticket], class: ticket.completed? ? "completed" : ""
