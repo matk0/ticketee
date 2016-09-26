@@ -1,1 +1,3 @@
-$("[data-ticket-id='<%= @ticket.id %>'] > .ticket-name > a").toggleClass('completed');
+$(function() {
+  $("[data-ticket-id='<%= @ticket.id %>'] > .ticket-name > a").toggleClass('completed');
+});
