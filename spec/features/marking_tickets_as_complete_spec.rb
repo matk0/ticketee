@@ -16,6 +16,7 @@ RSpec.feature "Users can mark tickets as complete" do
     within ticket_table_row do
       check "ticket[completed]" 
     end
+    reload_page
 
     expect(page).to have_css('.completed')
   end
