@@ -6,6 +6,11 @@ class ProjectsController < ApplicationController
   end
 
   def show
+    if params[:tag]
+      @tickets = @project.tickets.tagged_with(params[:tag])
+    else
+      @tickets = @project.tickets
+    end
   end
 
   def edit

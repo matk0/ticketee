@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160926085734) do
+ActiveRecord::Schema.define(version: 20160926152408) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "projects", force: :cascade do |t|
     t.string   "name"
@@ -19,6 +22,24 @@ ActiveRecord::Schema.define(version: 20160926085734) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  create_table "taggings", force: :cascade do |t|
+    t.integer  "ticket_id"
+    t.integer  "tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
+  add_index "taggings", ["ticket_id"], name: "index_taggings_on_ticket_id", using: :btree
+
+  create_table "tags", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "tags", ["name"], name: "index_tags_on_name", using: :btree
 
   create_table "tickets", force: :cascade do |t|
     t.string   "name"
@@ -30,8 +51,8 @@ ActiveRecord::Schema.define(version: 20160926085734) do
     t.boolean  "completed",   default: false
   end
 
-  add_index "tickets", ["author_id"], name: "index_tickets_on_author_id"
-  add_index "tickets", ["project_id"], name: "index_tickets_on_project_id"
+  add_index "tickets", ["author_id"], name: "index_tickets_on_author_id", using: :btree
+  add_index "tickets", ["project_id"], name: "index_tickets_on_project_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
@@ -53,7 +74,9 @@ ActiveRecord::Schema.define(version: 20160926085734) do
     t.string   "phone_number"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "taggings", "tags"
+  add_foreign_key "taggings", "tickets"
 end

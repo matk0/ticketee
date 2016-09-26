@@ -12,10 +12,19 @@ p = @project.description
   = link_to 'New Ticket', new_project_ticket_path(@project), class: 'success hollow button'
 
 table#tickets
-  - @project.tickets.each do |ticket|
+  thead
+    tr
+      th Completed ?
+      th Name
+      th Tags
+  tbody
+  - @tickets.each do |ticket|
     tr data-ticket-id="#{ticket.id}"
       td
         = simple_form_for [:toggle_completed, @project, ticket], remote: true do |f|
           = f.input_field :completed
       td.ticket-name
         = link_to ticket.name, [@project, ticket], class: ticket.completed? ? "completed" : ""
+      td.ticket-tags
+        - ticket.tags.each do |tag|
+          = link_to tag.name + " ", project_path(@project, tag: tag.name)

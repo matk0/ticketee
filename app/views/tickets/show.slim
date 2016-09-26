@@ -10,6 +10,9 @@
     tr
       th Created:
       td = "#{time_ago_in_words @ticket.created_at} ago"
+    tr
+      th Tags:
+      td = @ticket.all_tags
 
   .button-group
     = link_to "Edit Ticket", [:edit, @project, @ticket], class: "hollow success button"
