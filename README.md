@@ -3,4 +3,4 @@
 - [ ] Style notifications and validation errors.
 - [ ] Improve overall UX.
 - [ ] Improve overall styling.
-- [ ] Fix failing specs.
+- [ ] Fix failing JS based specs.
