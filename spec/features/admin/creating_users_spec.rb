@@ -12,6 +12,9 @@ RSpec.feature "Admins can create new users" do
   end
 
   scenario "with valid credentials" do
+    fill_in "First name", with: "Matej"
+    fill_in "Last name", with: "Lukasik"
+    fill_in "Phone number", with: "+421 123 456"
     fill_in "Email", with: "newbie@example.com"
     fill_in "Password", with: "password"
     click_button "Create User"
