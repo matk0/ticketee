@@ -6,6 +6,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
+    authorize @project, :show?
     if params[:tag]
       @tickets = @project.tickets.tagged_with(params[:tag])
     else
