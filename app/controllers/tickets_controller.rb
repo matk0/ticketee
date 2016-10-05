@@ -5,6 +5,10 @@ class TicketsController < ApplicationController
   def index
   end
 
+  def show
+    authorize @ticket, :show?
+  end
+
   def new
     @ticket = @project.tickets.build
   end
