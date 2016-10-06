@@ -10,7 +10,8 @@ p = @project.description
     = link_to 'Delete Project', admin_project_path(@project), method: :delete, data: { confirm: "Are you sure you want to delete this project?" }, class: "alert hollow button"
 
 .button-group
-  = link_to 'New Ticket', new_project_ticket_path(@project), class: 'success hollow button'
+  - if policy(Ticket.new(project: @project)).create?
+    = link_to 'New Ticket', new_project_ticket_path(@project), class: 'success hollow button'
 
 table#tickets
   thead
