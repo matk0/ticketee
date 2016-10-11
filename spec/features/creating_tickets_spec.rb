@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.feature "Users can create new tickets" do
   let(:user) { FactoryGirl.create(:user) }
-  
+
   before do
     login_as(user)
     project = FactoryGirl.create(:project, name: "Internet Explorer")
@@ -29,5 +29,18 @@ RSpec.feature "Users can create new tickets" do
     expect(page).to have_content "Ticket has not been created."
     expect(page).to have_content "Namecan't be blank"
     expect(page).to have_content "Descriptioncan't be blank"
+  end
+
+  scenario "with an attachment" do
+    fill_in "Name", with: "Add documentation for blink tag"
+    fill_in "Description", with: "The blink tag has a speed attribute"
+    attach_file "File", "spec/fixtures/speed.txt"
+    click_button "Create Ticket"
+
+    expect(page).to have_content "Ticket has been created."
+
+    within("#ticket .attachment") do
+      expect(page).to have_content "speed.txt"
+    end
   end
 end

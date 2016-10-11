@@ -21,3 +21,10 @@
       = link_to "Delete Ticket", [@project, @ticket], method: :delete, data: { confirm: "Are you sure you want to delete this ticket?" }, class: "hollow alert button"
 
   = simple_format @ticket.description
+
+  - if @ticket.attachment.present?
+    h4 Attachment
+    .attachment
+      p
+        = link_to File.basename(@ticket.attachment.url), @ticket.attachment.url
+        = number_to_human_size @ticket.attachment.size
