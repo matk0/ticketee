@@ -22,9 +22,10 @@
 
   = simple_format @ticket.description
 
-  - if @ticket.attachment.present?
-    h4 Attachment
-    .attachment
-      p
-        = link_to File.basename(@ticket.attachment.url), @ticket.attachment.url
-        = number_to_human_size @ticket.attachment.size
+  - if @ticket.attachments.any?
+    h4 Attachments
+    .attachments
+      - @ticket.attachments.each do |attachment|
+        p
+          = link_to File.basename(attachment.file.url), attachment.file.url
+          = number_to_human_size attachment.file.size
