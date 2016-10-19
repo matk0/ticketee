@@ -25,5 +25,5 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :attachments, only: [:show]
+  resources :attachments, only: [:show, :new]
 end

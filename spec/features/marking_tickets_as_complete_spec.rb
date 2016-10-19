@@ -1,7 +1,10 @@
 require "rails_helper"
 
 RSpec.feature "Users can mark tickets as complete" do
+  let(:user) { FactoryGirl.create(:user, :admin) }
+
   before do
+    login_as(user)
     project = FactoryGirl.create(:project, name: "Sublime Text 3")
     @ticket = FactoryGirl.create(:ticket)
     project.tickets << @ticket
@@ -11,12 +14,11 @@ RSpec.feature "Users can mark tickets as complete" do
   end
 
 
-  scenario "when everything is valid" do
+  scenario "when everything is valid", js: true do
     ticket_table_row = "[data-ticket-id='#{@ticket.id}']" 
     within ticket_table_row do
       check "ticket[completed]" 
     end
-    reload_page
 
     expect(page).to have_css('.completed')
   end

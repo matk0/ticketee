@@ -3,8 +3,8 @@
   = f.input :description
   = f.input :all_tags, placeholder: "Tags separated by comma"
 
-  = f.simple_fields_for :attachments do |ff|
-    = ff.input :file, as: :file, label: "File ##{ff.index + 1}"
-    = ff.input :file_cache, as: :hidden
+  #attachments
+    h3 Attachments
+    = render partial: 'attachments/form', locals: { f: f, index: 0 }
 
   = f.button :submit, class: 'hollow success button'
