@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  namespace :admin do
-  get 'users/index'
-  end
 
   root 'projects#index'
 
@@ -9,6 +6,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root 'application#index'
+    get 'users/index'
     resources :projects, only: [:new, :create, :destroy]
     resources :users do
       member do
