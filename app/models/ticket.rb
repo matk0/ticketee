@@ -1,6 +1,7 @@
 class Ticket < ActiveRecord::Base
   belongs_to :project
   belongs_to :author, class_name: 'User'
+  belongs_to :state
   has_many :taggings
   has_many :tags, through: :taggings
   has_many :attachments, dependent: :destroy
