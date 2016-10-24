@@ -24,4 +24,8 @@ Rails.application.routes.draw do
   end
 
   resources :attachments, only: [:show, :new]
+
+  resources :tickets, only: [] do
+    resources :comments, only: [:create]
+  end
 end

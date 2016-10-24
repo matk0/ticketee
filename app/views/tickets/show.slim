@@ -16,7 +16,7 @@
 
   .button-group
     - if policy(@ticket).update?
-      = link_to "Edit Ticket", [:edit, @project, @ticket], class: "hollow success button"
+      = link_to "Edit Ticket", [:edit, @project, @ticket], class: "hollow primary button"
     - if policy(@ticket).destroy?
       = link_to "Delete Ticket", [@project, @ticket], method: :delete, data: { confirm: "Are you sure you want to delete this ticket?" }, class: "hollow alert button"
 
@@ -29,3 +29,14 @@
         p
           = link_to File.basename(attachment.file.url), attachment_path(attachment)
           = number_to_human_size attachment.file.size
+
+h3 Comments
+
+#comments
+  - if @ticket.comments.persisted.any?
+    = render @ticket.comments.persisted
+  - else
+    p There are no comments for this ticket.
+
+- if policy(@comment).create?
+  = render "comments/form", ticket: @ticket, comment: @comment

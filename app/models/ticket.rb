@@ -4,6 +4,7 @@ class Ticket < ActiveRecord::Base
   has_many :taggings
   has_many :tags, through: :taggings
   has_many :attachments, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   accepts_nested_attributes_for :attachments, reject_if: :all_blank
 
