@@ -5,4 +5,9 @@ ul.actions
 
 ul#states
   - @states.each do |state|
-    = render "states/state", state: state
+    li
+      = render "states/state", state: state
+      - if state.default?
+        | (Default)
+      - else
+        = link_to "Make Default", make_default_admin_state_path(state)
