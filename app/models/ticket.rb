@@ -12,6 +12,8 @@ class Ticket < ActiveRecord::Base
   validates :name, presence: true
   validates :description, presence: true
 
+  before_create :assign_default_state
+
   def toggle_completed!
     self.toggle(:completed)
     self.save
@@ -29,5 +31,11 @@ class Ticket < ActiveRecord::Base
 
   def self.tagged_with(name)
     Tag.find_by_name!(name).tickets
+  end
+
+  private
+
+  def assign_default_state
+    self.state ||= State.default
   end
 end
