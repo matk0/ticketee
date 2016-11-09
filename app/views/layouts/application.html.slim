@@ -10,6 +10,12 @@ html lang="en"
     = javascript_include_tag "application"
     = csrf_meta_tag
 
+    - State.all.each do |state|
+      css:
+        .state-#{state.name.parameterize} {
+          background-color: #{state.color}
+        }
+
   body
     .top-bar
       .top-bar-left
