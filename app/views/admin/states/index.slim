@@ -1,0 +1,8 @@
+h1 States
+
+ul.actions
+  li = link_to "New State", new_admin_state_path, class: "new"
+
+ul#states
+  - @states.each do |state|
+    = render "states/state", state: state
