@@ -2,3 +2,5 @@ blockquote.comment
   = simple_format(comment.text)
   = time_ago_in_words(comment.created_at) + " ago by"
   cite = comment.author
+
+= state_transition_for(comment)
