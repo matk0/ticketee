@@ -2,10 +2,11 @@ class Ticket < ActiveRecord::Base
   belongs_to :project
   belongs_to :author, class_name: 'User'
   belongs_to :state
-  has_many :taggings
-  has_many :tags, through: :taggings
   has_many :attachments, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_and_belongs_to_many :tags, uniq: true
+
+  attr_accessor :tag_names
 
   accepts_nested_attributes_for :attachments, reject_if: :all_blank
 
@@ -19,18 +20,12 @@ class Ticket < ActiveRecord::Base
     self.save
   end
 
-  def all_tags=(names)
-    self.tags = names.split(",").map do |name|
-      Tag.where(name: name.strip).first_or_create!
-    end
+  def tag_names
+    @tag_names
   end
 
-  def all_tags
-    self.tags.map(&:name).join(", ")
-  end
-
-  def self.tagged_with(name)
-    Tag.find_by_name!(name).tickets
+  def tag_names= names
+    @tag_names = names
   end
 
   private
