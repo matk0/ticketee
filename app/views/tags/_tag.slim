@@ -1,3 +1,4 @@
 .tag
-  = link_to "<span></span>".html_safe, "#", class: "remove", title: "remove"
+  - if policy(ticket).tag?
+    = link_to "<span>x</span>".html_safe, remove_ticket_tag_path(ticket, tag), method: :delete, remote: true, class: "remove", title: "remove"
   .secondary.label = tag.name
