@@ -4,5 +4,6 @@ h3 New Comment
   = f.input :text
   - if policy(ticket).change_state?
     = f.association :state
+  - if policy(ticket).tag?
     = render "tags/form", f: f
   = f.submit class: 'hollow primary button'
