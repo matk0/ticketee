@@ -26,6 +26,7 @@ Rails.application.routes.draw do
         get :search
       end
       member do
+        post :watch
         patch :toggle_completed
       end
     end

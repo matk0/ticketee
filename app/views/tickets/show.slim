@@ -17,8 +17,12 @@
     - if @ticket.state.present?
       tr
         th State:
-        td
-          = render @ticket.state
+        td = render @ticket.state
+    tr#watchers
+      th Watchers:
+      td
+        = toggle_watching_button(@ticket)
+        = @ticket.watchers.map(&:email).to_sentence
 
   .button-group
     - if policy(@ticket).update?
