@@ -2,5 +2,12 @@ language: ruby
 rvm: 2.3.1
 script: bundle exec rspec
 before_install:
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
+deploy:
+  provider: heroku
+  api_key:
+    secure: EtLdjWZ99VjeRTLr4icomccmAX+t+2rc4UDy2sOuYY/3+FaBDehn3MBQRRjejsQ+2jMLb7695YlUqC0+j8t14ac9T+SkdI2eBIK6PiV4NEcPOCpe0TT9TDtlxuWs+X9SIOtYoAjZTcVrFx6DoArrj3r1DStALcZ7k0XJWyBj8F8CCsulRDiwHSynE7Ag8OeNSTvqPSesFsPQ3K1ALk7FfsAMHDXZ8wHx2fYo90Guysrbsl5qIFaqihTfcbSRH7yxF/pbZuPJe8kktr+8nBSSW9P6Dk1xugfTX0PZ6wWFy9yWCyKk5eWHdVhxqdnAJIU+GrXFlEvpA2TYpTPj9ZhpgNlgMaRY7VqHeQD+H2Die+b2arXX5fZOHD1O1ZOkok7eR7BiYLt4VeRSAjv7oa5OqLC/hLcedQhBU5wPnjsUd/tYtyu1K1eE3zMwAB8sXTRYmHFTQCY3a9njRb91ZRKcKkhcVHUTLAiwIAKI1UvbbE1IYsJCDLYFq09GSAawodjc+1yLLg7HMSnphCIK8tL/yWr9WvnNQvvJjkuMRggEFzK9qgE3T9b/TICaG7q3N/ecBzOhZSH5EEN9RJ0ywl8fck3kjCNfbO6BG3pintMJb+enBz/Ekz7W4OxnQFj+BIW/9gHVaC56GXa4Ea0xWZOQAehFkkncKk2bLQwZJs0D/P8=
+  app: peaceful-thicket-76794
+  on:
+    repo: matk0/ticketee
