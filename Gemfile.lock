@@ -258,6 +258,7 @@ GEM
       method_source (~> 0.8.1)
       slop (~> 3.4)
     public_suffix (2.0.4)
+    puma (3.6.0)
     pundit (0.3.0)
       activesupport (>= 3.0.0)
     rack (1.6.4)
@@ -392,6 +393,7 @@ DEPENDENCIES
   jquery-rails
   net-ssh
   pg
+  puma
   pundit (~> 0.3.0)
   rails (= 4.2.7)
   rails_12factor
