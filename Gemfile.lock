@@ -245,6 +245,7 @@ GEM
     minitest (5.9.1)
     multi_json (1.12.1)
     nenv (0.3.0)
+    net-ssh (3.1.1)
     nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
     notiffany (0.1.1)
@@ -389,6 +390,7 @@ DEPENDENCIES
   guard-livereload (~> 2.5, >= 2.5.2)
   jbuilder (~> 2.0)
   jquery-rails
+  net-ssh
   pg
   pundit (~> 0.3.0)
   rails (= 4.2.7)

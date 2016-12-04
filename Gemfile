@@ -17,6 +17,7 @@ gem 'pundit', '~> 0.3.0'
 gem 'carrierwave', '~> 0.10.0'
 gem 'searcher', git: 'https://github.com/radar/searcher.git'
 gem 'fog', '~> 1.29.0'
+gem 'net-ssh'
 
 group :development, :test do
   gem 'byebug'
