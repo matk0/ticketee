@@ -6,6 +6,6 @@ class CommentNotifier < ApplicationMailer
     @project = @ticket.project
 
     subject = "[ticketee] #{@project.name} - #{@ticket.name}"
-    mail(to: user.email, subject: subject)
+    mail(to: user.email, from: @comment.author, subject: subject)
   end
 end
