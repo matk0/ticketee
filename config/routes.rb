@@ -4,6 +4,12 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+  namespace :api do
+    resources :projects, only: [] do
+      resources :tickets
+    end
+  end
+
   namespace :admin do
     root 'application#index'
     get 'users/index'
