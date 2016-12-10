@@ -1,9 +1,19 @@
-h1 Projects
+- if current_user
+  - admins_only do
+    .row.page-title
+      .small-6.columns
+        h1 Projects
+      .small-4.columns
+        = link_to 'New Project', new_admin_project_path, class:"success hollow button"
 
-- admins_only do
-  = link_to 'New Project', new_admin_project_path, class:"success hollow button"
-
-#projects
-  - @projects.each do |project|
-    h2 = link_to project.name, project_path(project)
-    p = project.description
+  .row
+    .small-10.columns
+      #projects
+        - @projects.each do |project|
+          h3 = link_to project.name, project_path(project)
+          p = project.description
+- else
+  .row
+    .small-6.small-centered.columns.page-title
+      h1 Welcome to Ticketee
+      h4 just another project management app

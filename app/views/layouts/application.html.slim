@@ -35,6 +35,9 @@ html lang="en"
 
     .row
       - flash.each do |key, message|
-        = message
+        .primary.callout data-closable=""
+          = message
+          button.close-button aria-label="Dismiss alert" type="button" data-close=""
+            span &times;
 
       == yield

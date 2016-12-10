@@ -1,4 +1,4 @@
-.row#admin
+.row#admin.page-title
   .small-9.columns
     h1 Admin Lounge
 
@@ -6,5 +6,6 @@
 
   .small-3.columns
     h2 Admin Links
-    = link_to "Users", admin_users_path
-    = link_to "States", admin_states_path
+    ul.vertical.menu
+      li = link_to "Users", admin_users_path
+      li = link_to "States", admin_states_path

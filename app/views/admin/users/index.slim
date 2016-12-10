@@ -1,7 +1,11 @@
-h1 Users
-.actions
-  = link_to "New User", new_admin_user_path, class: "hollow success button"
+.row.page-title
+  .small-6.columns
+    h1 Users
+  .small-4.columns
+    = link_to "New User", new_admin_user_path, class: "hollow success button"
 
-ul
-  - @users.each do |user|
-    li = link_to user, [:admin, user]
+.row
+  .small-6.columns
+    ul
+      - @users.each do |user|
+        li = link_to user, [:admin, user]

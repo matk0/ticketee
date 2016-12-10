@@ -1,13 +1,14 @@
-h1 States
-
-ul.actions
-  li = link_to "New State", new_admin_state_path, class: "new"
+.row.page-title
+  .small-6.columns
+    h1 States
+  .small-6.columns.text-right
+    = link_to "New State", new_admin_state_path, class: "success hollow button"
 
 ul#states
   - @states.each do |state|
     li
       = render "states/state", state: state
       - if state.default?
-        | (Default)
+        | Default
       - else
-        = link_to "Make Default", make_default_admin_state_path(state)
+        = link_to "Make Default", make_default_admin_state_path(state), class: "make-default tiny primary hollow button"

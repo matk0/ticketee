@@ -1,8 +1,14 @@
 = simple_form_for [:admin, user] do |f|
-  = f.input :first_name
-  = f.input :last_name
-  = f.input :phone_number
-  = f.input :email
+  .row
+    .small-6.columns
+      = f.input :first_name
+    .small-6.columns
+      = f.input :last_name
+  .row
+    .small-6.columns
+      = f.input :phone_number
+    .small-6.columns
+      = f.input :email
   = f.input :password
   = f.input :admin, label: "Is an admin?"
 
@@ -14,5 +20,6 @@
         td
           = select_tag dom_id(project), options_for_select(roles, user.role_on(project)), name: "roles[#{project.id}]", include_blank: true
 
-  = f.button :submit, class: "hollow button"
+  .text-right
+    = f.button :submit, class: "hollow button"
 
