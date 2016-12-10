@@ -19,6 +19,7 @@ gem 'searcher', git: 'https://github.com/radar/searcher.git'
 gem 'net-ssh'
 gem 'carrierwave-aws'
 gem 'active_model_serializers', '~> 0.9.3'
+gem 'sinatra'
 
 group :development, :test do
   gem 'byebug'

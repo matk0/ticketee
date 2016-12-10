@@ -8,6 +8,10 @@ Rails.application.routes.draw do
   devise_for :users
 
   namespace :api do
+    namespace :v2 do
+      mount API::V2::Tickets, at: "/projects/:project_id/tickets"
+    end
+
     resources :projects, only: [] do
       resources :tickets
     end
