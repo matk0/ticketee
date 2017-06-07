@@ -27,8 +27,10 @@ ul.actions
 table#tickets
   thead
     tr
-      th Completed ?
-      th Name
+      th Completed
+      th = sortable "name"
+      th = sortable "created_at", "Created"
+      th = sortable "updated_at", "Changed"
       th Tags
   tbody
   - @tickets.each do |ticket|
@@ -38,6 +40,10 @@ table#tickets
           = f.input_field :completed
       td.ticket-name
         = link_to ticket.name, [@project, ticket], class: ticket.completed? ? "completed" : ""
+      td.ticket-created
+        = ticket.created_at.strftime("%e %b %Y")
+      td.ticket-changed
+        = ticket.updated_at.strftime("%e %b %Y")
       td.ticket-tags
         - ticket.tags.each do |tag|
           = link_to tag.name + " ", search_project_tickets_path(ticket.project, search: tag.name)
