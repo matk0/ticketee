@@ -40,4 +40,4 @@ table#tickets
         = link_to ticket.name, [@project, ticket], class: ticket.completed? ? "completed" : ""
       td.ticket-tags
         - ticket.tags.each do |tag|
-          = link_to tag.name + " ", project_path(@project, tag: tag.name)
+          = link_to tag.name + " ", search_project_tickets_path(ticket.project, search: tag.name)

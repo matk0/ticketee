@@ -26,16 +26,7 @@ RSpec.feature "Users can search for tickets matching specific criteria" do
   end
 
   scenario "searching by tag" do
-    fill_in "Search", with: "tag:iteration_1"
-    click_button "Search"
-    within("#tickets") do
-      expect(page).to have_link "Create projects"
-      expect(page).to_not have_link "Create users"
-    end
-  end
-
-  scenario "searching by state" do
-    fill_in "Search", with: "state:Open"
+    fill_in "Search", with: "iteration_1"
     click_button "Search"
     within("#tickets") do
       expect(page).to have_link "Create projects"
