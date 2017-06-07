@@ -2,7 +2,8 @@ class Ticket < ActiveRecord::Base
   include PgSearch
 
   pg_search_scope :search, :associated_against => {
-    tags: :name
+    tags: :name,
+    comments: :text
   }
 
   belongs_to :project
