@@ -17,11 +17,6 @@ class Ticket < ActiveRecord::Base
 
   before_create :assign_default_state
 
-  searcher do
-    label :tag, from: :tags, field: "name"
-    label :state, from: :state, field: "name"
-  end
-
   def toggle_completed!
     self.toggle(:completed)
     self.save
