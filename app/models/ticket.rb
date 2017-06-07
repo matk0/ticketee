@@ -32,13 +32,17 @@ class Ticket < ActiveRecord::Base
   end
 
   def tag_names= names
-    @tag_names = names
-    names.split.each do |name|
+    @tag_names = remove_whitespace(names)
+    names.split(",").each do |name|
       self.tags << Tag.find_or_initialize_by(name: name)
     end
   end
 
   private
+
+  def remove_whitespace string
+    string.gsub!(/\s+/, '')
+  end
 
   def assign_default_state
     self.state ||= State.default
