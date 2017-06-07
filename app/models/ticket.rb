@@ -1,4 +1,10 @@
 class Ticket < ActiveRecord::Base
+  include PgSearch
+
+  pg_search_scope :search, :associated_against => {
+    tags: :name
+  }
+
   belongs_to :project
   belongs_to :author, class_name: 'User'
   belongs_to :state
