@@ -28,9 +28,9 @@ table#tickets
   thead
     tr
       th Completed
-      th = sortable "name"
-      th = sortable "created_at", "Created"
-      th = sortable "updated_at", "Changed"
+      th Name
+      th Created
+      th Changed
       th Tags
   tbody
   - @tickets.each do |ticket|

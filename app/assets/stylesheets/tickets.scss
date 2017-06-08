@@ -10,3 +10,25 @@
   font-size: 12px;
   padding: 0.3em 0.6em;
 }
+
+#tickets thead tr th {
+  background-color: white;
+}
+#tickets thead tr .tablesorter-header:not(.sorter-false) {
+  background-image: image-url("both.png");
+  background-repeat: no-repeat;
+  background-position: center right;
+  cursor: pointer;
+}
+
+#tickets thead tr .tablesorter-headerAsc:not(.sorter-false)  {
+  background-image: image-url("arrow-up.png");
+}
+#tickets thead tr .tablesorter-headerDesc:not(.sorter-false) {
+  background-image: image-url("arrow-down.png");
+}
+
+#tickets thead tr .tablesorter-headerDesc,
+#tickets thead tr .tablesorter-headerAsc {
+  background-color: white;
+}
