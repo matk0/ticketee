@@ -63,7 +63,13 @@ class TicketsController < ApplicationController
   def search
     authorize @project, :show?
     if params[:search].present?
-      @tickets = @project.tickets.search(params[:search])
+      if params[:exact_match]
+        @tickets = @project.tickets.search(params[:search] + negation)
+      elsif params[:at_least_one_matches]
+        @tickets = @project.tickets.search_for_at_least_one_match(params[:search])
+      else
+        @tickets = @project.tickets.search(params[:search])
+      end
     else
       @tickets = @project.tickets
     end
@@ -90,6 +96,15 @@ class TicketsController < ApplicationController
   end
 
   private
+
+  def negation
+    negative_tags = Tag.where.not(name: tags_from_params)
+    negative_tags.inject(" ") {|negatives, tag| negatives += "!#{tag.name} "}
+  end
+
+  def tags_from_params
+    params[:search].gsub(/\s+/, '').split(",")
+  end
 
   def set_project
     @project = Project.find(params[:project_id])

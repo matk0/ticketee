@@ -2,9 +2,21 @@ class Ticket < ActiveRecord::Base
   include PgSearch
 
   pg_search_scope :search, :associated_against => {
-    tags: :name,
-    comments: :text
-  }
+                              tags: :name,
+                              comments: :text
+                            },
+                            :using => {
+                              :tsearch => {:negation => true}
+                            }
+
+  pg_search_scope :search_for_at_least_one_match, :associated_against => {
+                              tags: :name,
+                              comments: :text
+                            },
+                            :using => {
+                              :tsearch => {:any_word => true}
+                            }
+
 
   belongs_to :project
   belongs_to :author, class_name: 'User'
@@ -43,7 +55,7 @@ class Ticket < ActiveRecord::Base
   private
 
   def remove_whitespace string
-    string.gsub!(/\s+/, '')
+    string.gsub(/\s+/, '')
   end
 
   def assign_default_state

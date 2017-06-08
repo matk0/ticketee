@@ -17,12 +17,20 @@
     - if policy(Ticket.new(project: @project)).create?
       = link_to 'New Ticket', new_project_ticket_path(@project), class: 'success hollow button'
 
-ul.actions
-  li
-    = form_tag search_project_tickets_path(@project), method: :get, class: 'form-inline' do
+= form_tag search_project_tickets_path(@project), method: :get, class: 'form-inline' do
+  .row
+    .small-12.columns
       = label_tag "search", "Search", class: "sr-only"
       = text_field_tag "search", params[:search], class: "form-control"
-      = submit_tag "Search", class: "primary hollow button"
+  .row
+    .small-3.columns
+      = check_box_tag "exact_match", true
+      = label_tag "exact_match", "Exact match"
+    .small-3.columns
+      = check_box_tag "at_least_one_matches", true
+      = label_tag "at_least_one_matches", "At least one matches"
+    .small-3.columns
+      = submit_tag "Search", class: "primary large hollow button float-right"
 
 table#tickets
   thead
