@@ -1,0 +1,23 @@
+table#tickets
+  thead
+    tr
+      th Completed
+      th Name
+      th Created
+      th Changed
+      th Tags
+  tbody
+  - @tickets.each do |ticket|
+    tr data-ticket-id="#{ticket.id}"
+      td
+        = simple_form_for [:toggle_completed, @project, ticket], remote: true do |f|
+          = f.input_field :completed
+      td.ticket-name
+        = link_to ticket.name, [@project, ticket], class: ticket.completed? ? "completed" : ""
+      td.ticket-created
+        = ticket.created_at.strftime("%e %b %Y")
+      td.ticket-changed
+        = ticket.updated_at.strftime("%e %b %Y")
+      td.ticket-tags
+        - ticket.tags.each do |tag|
+          = tag.name + "  "

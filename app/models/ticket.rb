@@ -1,23 +1,4 @@
 class Ticket < ActiveRecord::Base
-  include PgSearch
-
-  pg_search_scope :search, :associated_against => {
-                              tags: :name,
-                              comments: :text
-                            },
-                            :using => {
-                              :tsearch => {:negation => true}
-                            }
-
-  pg_search_scope :search_for_at_least_one_match, :associated_against => {
-                              tags: :name,
-                              comments: :text
-                            },
-                            :using => {
-                              :tsearch => {:any_word => true}
-                            }
-
-
   belongs_to :project
   belongs_to :author, class_name: 'User'
   belongs_to :state
@@ -52,19 +33,28 @@ class Ticket < ActiveRecord::Base
     end
   end
 
+  def self.search_by_tags *search_terms
+    joins(:tags).where("tags.name LIKE some ( array[?] )", search_terms.flatten).uniq
+  end
+
+  def self.search_with_at_least_one_matching_tag *search_terms
+    joins(:tags).where("tags.name LIKE any ( array[?] )", search_terms.flatten)
+  end
+
   private
 
-  def remove_whitespace string
-    string.gsub(/\s+/, '')
-  end
-
-  def assign_default_state
-    self.state ||= State.default
-  end
-
-  def author_watches_me
-    if author.present? && !self.watchers.include?(author)
-      self.watchers << author
+    def remove_whitespace string
+      string.gsub(/\s+/, '')
     end
-  end
+
+    def assign_default_state
+      self.state ||= State.default
+    end
+
+    def author_watches_me
+      if author.present? && !self.watchers.include?(author)
+        self.watchers << author
+      end
+    end
+
 end

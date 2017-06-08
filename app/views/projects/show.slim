@@ -17,41 +17,19 @@
     - if policy(Ticket.new(project: @project)).create?
       = link_to 'New Ticket', new_project_ticket_path(@project), class: 'success hollow button'
 
-= form_tag search_project_tickets_path(@project), method: :get, class: 'form-inline' do
+= form_tag new_ticket_search_path(project_id: @project), method: :get, remote: true, class: 'form-inline' do
   .row
     .small-12.columns
-      = label_tag "search", "Search", class: "sr-only"
-      = text_field_tag "search", params[:search], class: "form-control"
+      = label_tag "search", "Search for tickets by tags (separated by comma)", class: "sr-only"
+      = text_field_tag "search_terms", params[:search], class: "form-control"
   .row
     .small-3.columns
       = check_box_tag "exact_match", true
       = label_tag "exact_match", "Exact match"
     .small-3.columns
-      = check_box_tag "at_least_one_matches", true
-      = label_tag "at_least_one_matches", "At least one matches"
+      = check_box_tag "at_least_one_match", true
+      = label_tag "at_least_one_match", "At least one match"
     .small-3.columns
       = submit_tag "Search", class: "primary large hollow button float-right"
 
-table#tickets
-  thead
-    tr
-      th Completed
-      th Name
-      th Created
-      th Changed
-      th Tags
-  tbody
-  - @tickets.each do |ticket|
-    tr data-ticket-id="#{ticket.id}"
-      td
-        = simple_form_for [:toggle_completed, @project, ticket], remote: true do |f|
-          = f.input_field :completed
-      td.ticket-name
-        = link_to ticket.name, [@project, ticket], class: ticket.completed? ? "completed" : ""
-      td.ticket-created
-        = ticket.created_at.strftime("%e %b %Y")
-      td.ticket-changed
-        = ticket.updated_at.strftime("%e %b %Y")
-      td.ticket-tags
-        - ticket.tags.each do |tag|
-          = link_to tag.name + " ", search_project_tickets_path(ticket.project, search: tag.name)
+= render 'tickets_table'
