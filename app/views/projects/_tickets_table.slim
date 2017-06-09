@@ -20,4 +20,4 @@ table#tickets
         = ticket.updated_at.strftime("%e %b %Y")
       td.ticket-tags
         - ticket.tags.each do |tag|
-          = tag.name + "  "
+          = "#{tag.name}#{', ' unless tag == ticket.tags.last}"
