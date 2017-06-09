@@ -7,8 +7,7 @@ class TicketSearch
 
   def search project:, exact_match: false, at_least_one_match: false
     if exact_match
-      tickets = project.tickets.search_by_tags terms
-      tickets.select { |ticket| ticket.tags.count == normalized_terms.count }
+      project.tickets.search_by_tags_exactly terms
     elsif at_least_one_match
       project.tickets.search_with_at_least_one_matching_tag terms
     else

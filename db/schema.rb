@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161206072939) do
+ActiveRecord::Schema.define(version: 20170609150721) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(version: 20161206072939) do
     t.integer  "author_id"
     t.boolean  "completed",   default: false
     t.integer  "state_id"
+    t.integer  "tags_count"
   end
 
   add_index "tickets", ["author_id"], name: "index_tickets_on_author_id", using: :btree
