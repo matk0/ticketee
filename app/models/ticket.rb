@@ -39,32 +39,32 @@ class Ticket < ActiveRecord::Base
     end
   end
 
-  def self.search_by_tags search_terms
+  def self.regular_search terms
     ticket_ids = ActiveRecord::Base.connection.execute("SELECT t.id FROM tickets t
                                                         JOIN tags_tickets tt ON t.id = tt.ticket_id
                                                         JOIN tags ta ON tt.tag_id = ta.id
-                                                        WHERE #{sqlize_search_terms search_terms}
+                                                        WHERE #{sqlize_search_terms terms}
                                                         GROUP BY t.id
-                                                        HAVING array_length(array_agg(ta.name), 1) = #{search_terms.count};")
+                                                        HAVING array_length(array_agg(ta.name), 1) = #{terms.count};")
     Ticket.find(ticket_ids.values.flatten)
   end
 
-  def self.search_by_tags_exactly search_terms
+  def self.exact_match_search terms
     ticket_ids = ActiveRecord::Base.connection.execute("SELECT t.id FROM tickets t
                                                         JOIN tags_tickets tt ON t.id = tt.ticket_id
                                                         JOIN tags ta ON tt.tag_id = ta.id
-                                                        WHERE #{sqlize_search_terms search_terms}
-                                                        AND #{search_terms.count} = t.tags_count 
+                                                        WHERE #{sqlize_search_terms terms}
+                                                        AND #{terms.count} = t.tags_count 
                                                         GROUP BY t.id
-                                                        HAVING array_length(array_agg(ta.name), 1) = #{search_terms.count};")
+                                                        HAVING array_length(array_agg(ta.name), 1) = #{terms.count};")
     Ticket.find(ticket_ids.values.flatten)
   end
 
-  def self.search_with_at_least_one_matching_tag search_terms
+  def self.at_least_one_match_search terms
     ticket_ids = ActiveRecord::Base.connection.execute("SELECT t.id FROM tickets t
                                                         JOIN tags_tickets tt ON t.id = tt.ticket_id
                                                         JOIN tags ta ON tt.tag_id = ta.id
-                                                        WHERE #{sqlize_search_terms search_terms}
+                                                        WHERE #{sqlize_search_terms terms}
                                                         GROUP BY t.id;")
     Ticket.find(ticket_ids.values.flatten)
   end

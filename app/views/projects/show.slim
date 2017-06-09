@@ -24,11 +24,14 @@
       = text_field_tag "search_terms", params[:search], class: "form-control"
   .row
     .small-3.columns
-      = check_box_tag "exact_match", true
-      = label_tag "exact_match", "Exact match"
+      = radio_button_tag :search_mode, :regular_search, true
+      = label_tag "search_mode", "Regular search"
     .small-3.columns
-      = check_box_tag "at_least_one_match", true
-      = label_tag "at_least_one_match", "At least one match"
+      = radio_button_tag :search_mode, :exact_match_search
+      = label_tag :search_mode, "Exact match"
+    .small-3.columns
+      = radio_button_tag :search_mode, :at_least_one_match_search
+      = label_tag :search_mode, "At least one match"
     .small-3.columns
       = submit_tag "Search", class: "primary large hollow button float-right"
 

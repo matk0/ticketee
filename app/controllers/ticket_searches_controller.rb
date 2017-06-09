@@ -7,9 +7,7 @@ class TicketSearchesController < ApplicationController
 
     if search_terms.present?
       ticket_search = TicketSearch.new search_terms
-      @tickets = ticket_search.search(project: @project,
-                                     exact_match: exact_match,
-                                     at_least_one_match: at_least_one_match)
+      @tickets = ticket_search.search(project: @project, search_mode: search_mode)
     else
       @tickets = @project.tickets
     end
@@ -21,12 +19,11 @@ class TicketSearchesController < ApplicationController
       params[:search_terms]
     end
 
-    def exact_match
-      params[:exact_match] == "true" ? true : false
+    def search_mode
+      if ["regular_search", "exact_match_search", "at_least_one_match_search"].include?(params[:search_mode]) 
+        params[:search_mode]
+      else
+        raise "Unsupported search mode."
+      end
     end
-
-    def at_least_one_match
-      params[:at_least_one_match] == "true" ? true : false
-    end
-
 end
